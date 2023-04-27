@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Prints all files and folders in a directory
+
+shopt -s nullglob
+
+for file in *
+do
+	echo "$file" | cut -d '-' -f 2-100
+done
