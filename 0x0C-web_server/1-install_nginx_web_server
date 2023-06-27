@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# install and configure nginx web server
+
+# install nginx
+sudo apt-get update
+sudo apt-get install nginx -y
+
+# Change the owner of the nginx default root folder
+sudo chown -R ubuntu /var/www
+
+# Change the content of the html file
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+
+# Start the nginx service
+sudo service nginx start
