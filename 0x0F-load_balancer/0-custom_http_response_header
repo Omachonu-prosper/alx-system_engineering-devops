@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Bash script to:
+#	Configure Nginx so that its HTTP response contains a custom header
+#	The name of the custom HTTP header must be X-Served-By
+#	The value of the custom HTTP header must be the hostname of the server Nginx is running on
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Configure custom HTTP response header
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+sudo chown -R ubuntu /etc/nginx/sites-available
+sudo cat <<EOT > /etc/nginx/sites-available/default
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+    add_header X-Served-By \$hostname;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+}
+EOT
+
+# Restart Nginx service
+sudo systemctl restart nginx.service
