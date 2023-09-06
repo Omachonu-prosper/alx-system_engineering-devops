@@ -6,7 +6,7 @@
 
 sudo apt-get update
 sudo apt-get install -y haproxy
-sudo chown $USER -R /etc/haproxy/haproxy.cfg
+# sudo chown -R $USER /etc/haproxy/haproxy.cfg
 sudo echo "
 frontend client
         mode http
@@ -20,4 +20,4 @@ backend my_servers
         balance roundrobin
 " >> /etc/haproxy/haproxy.cfg
 
-sudo systemctl restart haproxy
+sudo service haproxy restart
